@@ -347,8 +347,8 @@ namespace Health.Controllers
                 message.Subject = "Thanks for registering with my Health App!";
                 message.Text = "Thanks for registering with my Health App!";
 
-                var credentials = new NetworkCredential("quoc.m.duong", "uaaQD4512");
-                var transportWeb = new Web("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");
+                var credentials = new NetworkCredential("0", "0");
+                var transportWeb = new Web("0");
 
                 await transportWeb.DeliverAsync(message);
             }
