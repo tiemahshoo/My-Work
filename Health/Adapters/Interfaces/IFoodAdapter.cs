@@ -21,5 +21,9 @@ namespace Health.Adapters.Interfaces
         int getDayId();
 
         List<TotalsVM> DeleteId(int id);
+
+        List<TotalsVM> DeleteTotals(int id);
+
+        List<TotalsVM> GetList(int id);
     }
 }

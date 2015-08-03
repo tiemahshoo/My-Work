@@ -30,6 +30,12 @@ namespace Health.Controllers
             return Ok(dayID);
         }
 
+        public IHttpActionResult Get(int id)
+        {
+            List<TotalsVM> totals = _adapter.DeleteTotals(id);
+            return Ok(totals);
+        }
+
         [HttpPost]
         public IHttpActionResult Post(List<TotalsVM> YourFood)
         {

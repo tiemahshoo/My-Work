@@ -22,14 +22,10 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -182,7 +178,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\Adapters\UserAdapter.cs" />
     <Compile Include="Adapters\Adapters\FoodAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IUserAdapter.cs" />
     <Compile Include="Adapters\Interfaces\IFoodAdapter.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -219,9 +217,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\apiDeleteController.cs" />
     <Compile Include="Controllers\apiDisplayController.cs" />
     <Compile Include="Controllers\apiFoodController.cs" />
+    <Compile Include="Controllers\apiListController.cs" />
+    <Compile Include="Controllers\apiMyMealListController.cs" />
     <Compile Include="Controllers\apiTotalsController.cs" />
+    <Compile Include="Controllers\apiUserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -230,7 +232,7 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\MaleVM.cs" />
+    <Compile Include="Models\Meal_UserVM.cs" />
     <Compile Include="Models\TotalsVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -240,22 +242,26 @@
   <ItemGroup>
     <Content Include="App\Scripts\App.js" />
     <Content Include="App\Scripts\Controllers\FoodController.js" />
+    <Content Include="App\Scripts\Controllers\MyMealsController.js" />
+    <Content Include="App\Scripts\Controllers\NavbarController.js" />
     <Content Include="App\Scripts\Controllers\RegistrationController.js" />
     <Content Include="App\Scripts\Controllers\UserController.js" />
     <Content Include="App\Scripts\Services\AddFactory.js" />
+    <Content Include="App\Scripts\Services\AuthFactory.js" />
+    <Content Include="App\Scripts\Services\MyMealsFactory.js" />
     <Content Include="App\Scripts\Services\UserFactory.js" />
     <Content Include="App\Scripts\Views\Home.html" />
     <Content Include="App\Scripts\Services\FoodFactory.js" />
     <Content Include="App\Scripts\Views\Login.html" />
     <Content Include="App\Scripts\Views\register.html" />
+    <Content Include="App\Scripts\Views\UserPage.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootswatch.css" />
-    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="icons\Delete.png" />
@@ -317,9 +323,7 @@
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
+    <None Include="Properties\PublishProfiles\VitaminTracker.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
@@ -1064,12 +1068,26 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\i18n\bootstrap.js" />
+    <Content Include="Scripts\i18n\bootstrap.min.js" />
     <Content Include="Scripts\i18n\cbpAnimatedHeader.js" />
     <Content Include="Scripts\i18n\classie.js" />
     <Content Include="Scripts\i18n\creative.js" />
+    <Content Include="Scripts\i18n\custom.js" />
+    <Content Include="Scripts\i18n\jquery.appear.js" />
     <Content Include="Scripts\i18n\jquery.easing.min.js" />
     <Content Include="Scripts\i18n\jquery.fittext.js" />
+    <Content Include="Scripts\i18n\jquery.fitvids.js" />
+    <Content Include="Scripts\i18n\jquery.flexslider-min.js" />
     <Content Include="Scripts\i18n\jquery.js" />
+    <Content Include="Scripts\i18n\jquery.min.js" />
+    <Content Include="Scripts\i18n\jquery.scrollTo.js" />
+    <Content Include="Scripts\i18n\jquery.sticky.js" />
+    <Content Include="Scripts\i18n\modernizr.custom.js" />
+    <Content Include="Scripts\i18n\nivo-lightbox.min.js" />
+    <Content Include="Scripts\i18n\owl.carousel.min.js" />
+    <Content Include="Scripts\i18n\stellar.js" />
+    <Content Include="Scripts\i18n\waypoints.min.js" />
     <Content Include="Scripts\i18n\wow.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1101,6 +1119,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\apiDelete\" />
+    <Folder Include="Views\apiList\" />
+    <Folder Include="Views\apiMyMealList\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

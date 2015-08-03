@@ -4,6 +4,7 @@
     o.yourfood = [];
     o.mealID = [];
     o.rec = [];
+    o.deleted = [];
     o.calcium = { nutrient_id: 301, value: 1000, unit: "mg", name: "Calcium, Ca", totalvitamins: 0, percent: 0 };
     o.copper = { nutrient_id: 312, value: 900, unit: "ug", name: "Copper, Cu", totalvitamins: 0, percent: 0 };
     o.fluoride = { nutrient_id: 313, value: 4, unit: "mg", name: "Fluoride, F", totalvitamins: 0, percent: 0 };
@@ -20,11 +21,42 @@
     o.vitaminD = { nutrient_id: 324, value: 15, unit: "ug", name: "Vitamin D", totalvitamins: 0, percent: 0 };
     o.vitaminE = { nutrient_id: 323, value: 22.4, unit: "iu", name: "Vitamin E (alpha-tocopherol)", totalvitamins: 0, percent: 0 };
     o.zinc = { name: "Zinc, Zn", unit: "mg", nutrient_id: 301, value: 11, totalvitamins: 0, percent: 0 };
+    o.savedmeal = {};
+
+    o.getlist = function () {
+        var config = { contextType: 'application/json' };
+        var defer = $q.defer();
+        $http.get('/api/apiList/' + o.mealID, config).success(function (data) {
+            defer.resolve(data);
+            o.yourfood.length = 0;
+            o.yourfood = data;
+        });
+        return defer.promise;
+    };
+
+    o.addMeal = function (id, mealname) {
+        var config = { contextType: 'application/json' };
+        o.savedmeal.MealName = mealname;
+        o.savedmeal.MealId = id;
+        $http.post('/api/apiUser/', o.savedmeal, config).success(function (data) {
+            alert("Meal Saved!");
+        }).error(function (data, status) {
+            console.log(data.status)
+        });
+    };
     o.delete = function (id) {
         var config = { contextType: 'application/json' };
         var defer = $q.defer();
         $http.delete('/api/apiTotals/' + id, config).success(function (data) {
             defer.resolve(data);
+            console.log(o.vit);
+            o.vit.length = length;
+            for (i = 0; i < length; i++) {
+                if (o.vit[i].dayid = id) {
+                    o.vit.splice(i, 1);
+                }
+            };
+            console.log(o.vit);
         }).error(function (data, status) {
             console.log(data, status)
         });
@@ -33,23 +65,21 @@
     o.DeleteTotals = function (id) {
         var defer = $q.defer();
         var config = { contextType: 'application/json' };
-        $http.get('/api/apiTotals/' + id, config).success(function (data) {
+        $http.get('/api/apiDisplay/' + id, config).success(function (data) {
             defer.resolve(data);
-            o.vit.length = 0;
-            o.vit = data;
+
             for (i = 0; i < data.length; i++) {
                 switch (data[i].nutrient_id) {
                     case 301:
                         cal = o.calcium.totalvitamins - parseInt(data[i].totalvitamins);
                         o.calcium.totalvitamins = cal;
                         o.calcium.percent = o.calcium.percent - parseInt(data[i].percent)
-                        console.log(o.calcium.totalvitamins)
                         break;
 
                     case 312:
-                        cop = o.copper.totalvitamins - parseInt(newfood[i].totalvitamins);
+                        cop = o.copper.totalvitamins - parseInt(data[i].totalvitamins);
                         o.copper.totalvitamins = cop;
-                        o.copper.percent = o.copper.percent - parseInt(data.percent)
+                        o.copper.percent = o.copper.percent - parseInt(data[i].percent)
                         break;
 
                     case 313:
@@ -127,6 +157,8 @@
                         break;
                 };
             };
+
+            o.rec.length = 0;
             o.rec.push(o.calcium);
             o.rec.push(o.copper);
             o.rec.push(o.fluoride);
@@ -143,12 +175,11 @@
             o.rec.push(o.vitaminD);
             o.rec.push(o.vitaminE);
             o.rec.push(o.zinc);
-            console.log(o.rec);
         }).error(function (data, status) {
             console.log(data, status);
         });
+
         return defer.promise;
-        o.DeleteTotals(id);
     };
     o.getTotals = function () {
         var defer = $q.defer();
@@ -156,7 +187,6 @@
         $http.get('/api/apiTotals/' + o.mealID, config).success(function (data) {
             defer.resolve(data);
             o.vit.length = 0;
-            o.vit = data;
             for (i = 0; i < data.length; i++) {
                 switch (data[i].nutrient_id) {
                     case 301:
@@ -167,9 +197,9 @@
                         break;
 
                     case 312:
-                        cop = o.copper.totalvitamins + parseInt(newfood[i].totalvitamins);
+                        cop = o.copper.totalvitamins + parseInt(data[i].totalvitamins);
                         o.copper.totalvitamins = cop;
-                        o.copper.percent = o.copper.percent + parseInt(data.percent)
+                        o.copper.percent = o.copper.percent + parseInt(data[i].percent)
                         break;
 
                     case 313:
@@ -247,6 +277,7 @@
                         break;
                 };
             };
+            o.rec.length = 0;
             o.rec.push(o.calcium);
             o.rec.push(o.copper);
             o.rec.push(o.fluoride);
@@ -283,13 +314,12 @@
                         cal = o.calcium.totalvitamins + parseInt(data[i].totalvitamins);
                         o.calcium.totalvitamins = cal;
                         o.calcium.percent = o.calcium.percent + parseInt(data[i].percent)
-                        console.log(o.calcium.totalvitamins)
                         break;
 
                     case 312:
-                        cop = o.copper.totalvitamins + parseInt(newfood[i].totalvitamins);
+                        cop = o.copper.totalvitamins + parseInt(data[i].totalvitamins);
                         o.copper.totalvitamins = cop;
-                        o.copper.percent = o.copper.percent + parseInt(data.percent)
+                        o.copper.percent = o.copper.percent + parseInt(data[i].percent)
                         break;
 
                     case 313:
@@ -383,7 +413,6 @@
             o.rec.push(o.vitaminD);
             o.rec.push(o.vitaminE);
             o.rec.push(o.zinc);
-            console.log(o.rec);
         }).error(function (data, status) {
             console.log(data, status);
         });
@@ -417,5 +446,6 @@
         return defer.promise;
         o.getTotals();
     };
+
     return o;
 }]);

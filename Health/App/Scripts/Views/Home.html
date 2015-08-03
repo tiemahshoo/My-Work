@@ -1,71 +1,71 @@
 ﻿<div ng-controller="FoodController">
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 container">
-            <button class="btn btn-primary" ng-click="search(searchText)">Search</button><input ng-model="searchText">
-            <div style="max-height:85vh; overflow-y: auto; overflow-x: no-content;">
-
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 container" id="bodyleft">
+            <input ng-model="searchText">
+            <button class="btn btn-default" ng-click="search(searchText)">Search</button>
+            <div>
                 <div ng-repeat="f in newfacts.list.item">
 
-                    <a ng-click="getInfo(f.ndbno)">{{f.name}}</a>
+                    <a ng-click="getInfo(f.ndbno)" style="color:black">{{f.name}}</a>
                 </div>
             </div>
-            <button class="btn btn-primary" ng-click="prevP(searchText)">Previous Page</button>
-            <button class="btn btn-primary" ng-click="next(searchText)">Next Page</button>
+            <button id="next" class="btn btn-default" ng-click="prevP(searchText)">Previous</button>
+            <button id="prev" class="btn btn-default" ng-click="next(searchText)">Next</button>
         </div>
+
         <!--Nutrition Facts-->
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 container">
-            <div style="max-height:85vh; overflow-y: auto; overflow-x: no-content;">
-                <button class="btn btn-success" ng-click="add(facts.report.food, vit)">Add This Food!</button>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 container" id="bodyright">
+            <div id="but">
+                <button class="btn btn-success" ng-click="add(facts.report.food, vit)" id="add">Add This Food!</button>
+            </div>
+            <section class="performance-facts">
+                <header class="performance-facts__header">
+                    <h1 class="performance-facts__title" style="color:black">Nutrition Facts</h1><div>
+                        <p style="color:black">
+                            {{facts.report.food.name}}
+                        </p>
+                        <p style="color:black">{{facts.report.food.fg}}</p>
+                    </div>
+                </header>
+                <table class="performance-facts__table">
+                    <thead>
+                        <tr>
+                            <th colspan="3">
+                                Amount Per 100g
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+                <table class="performance-facts__table">
+                    <tbody>
+                        <tr ng-repeat="n in facts.report.food.nutrients">
+                            <td colspan="1">
+                                {{n.name}}  {{n.value}} {{n.unit}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <div style="max-height:85vh; overflow-y: auto; overflow-x: no-content;" id="food" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 container">
+                
+                        <h1 class="performance-facts__title" style="color:black">Your Foods</h1>
+            <div ng-repeat="v in yourfood" id="yourFood">
+                <button style="padding:5px"id="add" class="btn btn-success" ng-click="addMeal(v.MealId, status.isLoggedIn)">Save This Meal</button>
                 <div>
-                    <section class="performance-facts">
-                        <header class="performance-facts__header">
-                            <h1 class="performance-facts__title" style="color:black">Nutrition Facts</h1><div>
-                                <p style="color:black">
-                                    {{facts.report.food.name}}
-                                </p>
-                                <p style="color:black">{{facts.report.food.fg}}</p>
-                            </div>
-                        </header>
-                        <table class="performance-facts__table">
-                            <thead>
-                                <tr>
-                                    <th colspan="3">
-                                        Amount Per 100g
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
-                        <table class="performance-facts__table">
-                            <tbody>
-                                <tr ng-repeat="n in facts.report.food.nutrients">
-                                    <td colspan="1">
-                                        {{n.name}}  {{n.value}} {{n.unit}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </section>
+                    {{v.food}} <button class="btn btn-danger" ng-click="delete(v.dayid)"><img style=" height: 16px; width: 16px" src="../../../icons/Delete.png" /></button>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row" style="max-height:85vh; overflow-y: auto; overflow-x: no-content;">
+            <h1 class="performance-facts__title" style="color:black">Recommended Daily Vitamins</h1>
+            <div ng-repeat="v in rec" id="rec">
+                <p>
+                    {{v.name}} {{v.value}} {{v.unit}} Total: {{v.totalvitamins}} {{v.unit}}
+                </p>
 
-        <h2>Your Foods</h2>
-        <div ng-repeat="v in vit">
-            <div ng-show="v.food != vit[$index - 1].food">
-                {{v.food}} <button class="btn btn-danger" ng-click="delete(v.dayid, v.MealId)"><img style=" height: 16px; width: 16px" src="../../../icons/Delete.png" /></button>
-            </div>
-        </div>
-        <h2>Recommended Daily Vitamins</h2>
-        <div ng-repeat="v in rec">
-            <p>
-                {{v.name}} {{v.value}} {{v.unit}} Total: {{v.totalvitamins}} {{v.unit}}
-            </p>
+                <div class="progress">
 
-            <div class="progress">
-
-                <div class="progress-bar" style="width:{{v.percent}}%"> </div>
+                    <div class="progress-bar" style="width:{{v.percent}}%"> </div>
+                </div>
             </div>
         </div>
     </div>

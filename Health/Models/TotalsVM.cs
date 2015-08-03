@@ -34,9 +34,10 @@ namespace Health.Models
             notImportant
         };
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string gender { get; set; }
         public double totalvitamins { get; set; }
         public double percent { get; set; }
+        public Meal_UserVM MealUser { get; set; }
     }
 }

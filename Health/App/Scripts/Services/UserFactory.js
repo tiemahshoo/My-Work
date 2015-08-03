@@ -1,4 +1,4 @@
-﻿app.factory('UserFactory', ['$http', '$q', function ($http, $q) {
+﻿app.factory('UserFactory', ['$http', '$q', function ($http, $q, $httpProvider) {
     var o = {};
 
     o.register = function (user) {
@@ -20,12 +20,14 @@
 
     o.removeToken = function () {
         localStorage.removeItem('token');
+        alert('You have signed out!');
     };
 
     o.login = function (user) {
         var q = $q.defer();
         $http.post('/Token', 'username=' + user.username + '&password=' + user.password + '&grant_type=password', { contentType: 'application/x-www-form-urlencoded' }).success(function (data) {
             o.setToken(data.access_token);
+            q.resolve();
         }).error(function (data) {
             q.reject(data.error_description);
         });
@@ -34,13 +36,9 @@
 
     o.logout = function () {
         o.removeToken();
-        o.status.roles.length = 0;
     };
-
     o.status = {};
-    o.status.roles = [];
     o.status.isLoggedIn = (o.getToken()) ? true : false;
-    if (o.status.isLoggedIn) o.getRoles();
 
     return o;
 }]);

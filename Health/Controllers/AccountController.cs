@@ -1,4 +1,5 @@
-﻿using Health.data.model;
+﻿using Health.data;
+using Health.data.model;
 using Health.Models;
 using Health.Providers;
 using Health.Results;
@@ -347,12 +348,14 @@ namespace Health.Controllers
                 message.Text = "Thanks for registering with my Health App!";
 
                 var credentials = new NetworkCredential("quoc.m.duong", "uaaQD4512");
-                var transportWeb = new Web("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");
+                var transportWeb = new Web("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");
 
                 await transportWeb.DeliverAsync(message);
+            }
+            else
+            {
                 return GetErrorResult(result);
             }
-
             return Ok();
         }
 
@@ -374,13 +377,13 @@ namespace Health.Controllers
             }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-
             IdentityResult result = await UserManager.CreateAsync(user);
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
-
+            user.Equals(User.Identity.IsAuthenticated);
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {

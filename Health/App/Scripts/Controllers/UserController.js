@@ -3,11 +3,12 @@
 
     $scope.login = function (user) {
         UserFactory.login(user).then(function () {
-            //success then
             $location.path('/');
         }, function (data) {
-            //fail then
             $scope.message = data;
         });
+    };
+    $scope.logout = function () {
+        UserFactory.logout();
     };
 }]);

@@ -3,136 +3,192 @@
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
 }
+
 .image {
-  width: 250px;
-  float: left;
-  margin: 20px;
+    width: 250px;
+    float: left;
+    margin: 20px;
 }
+
 body {
-  font-size: small;
-  line-height: 1.4;
+    font-size: small;
+    line-height: 1.4;
 }
+
 p {
-  margin: 0;
+    margin: 0;
 }
 
 .performance-facts {
-    border: 1px solid black;
     margin: 20px;
     float: left;
     width: 280px;
     padding: 0.5rem;
 }
-  table {
-    border-collapse: collapse;
-  }
 
 .performance-facts__title {
-  font-weight: bold;
-  font-size: 2rem;
-  margin: 0 0 0.25rem 0;
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 0 0 0.25rem 0;
 }
+
 .performance-facts__header {
     border-bottom: 10px solid black;
     padding: 0 0 0.25rem 0;
     margin: 0 0 0.5rem 0;
 }
-  p {
+
+p {
     margin: 0;
-  }
+}
 
 .performance-facts__table {
     width: 100%;
 }
 
- thead tr { border: 0;
-    }
-  
- th, td {
-      border: 0;
-    }
-  
-  
-  th, td {
+thead tr {
+    border: 0;
+}
+
+th, td {
+    border: 0;
+}
+
+th, td {
     font-weight: normal;
     text-align: left;
     padding: 0.25rem 0;
-    border-top: 1px solid black; 
+    border-top: 1px solid black;
     white-space: nowrap;
-  }
-  td {text-align:right;
-    }
+}
 
-   
-  
-  .blank-cell {
+td {
+    text-align: right;
+}
+
+.blank-cell {
     width: 1rem;
     border-top: 0;
-  }
-  .thick-row { border-top-width: 5px;
-    }
-    th, td {
-      border-top-width: 5px;
-    }
-  
+}
+
+.thick-row {
+    border-top-width: 5px;
+}
+
+th, td {
+    border-top-width: 5px;
+}
 
 .small-info {
-  font-size: 1.25rem;
+    font-size: 1.25rem;
 }
 
 .performance-facts__table--small {
     border-bottom: 1px solid #999;
     margin: 0 0 0.5rem 0;
 }
-  thead {border-bottom: 1px solid black; 
-    }
-    tr {
-      border-bottom: 1px solid black; 
-    
-  }
-  td {
-   
-      text-align: left;
-    
-  }
-  th, td {
+
+thead {
+    border-bottom: 1px solid black;
+}
+
+tr {
+    border-bottom: 1px solid black;
+}
+
+td {
+    text-align: left;
+}
+
+th, td {
     border: 0;
     padding: 0;
-  
 }
 
 .performance-facts__table--grid {
-  
-  margin: 0 0 0.5rem 0;
-
-      text-align: left;
-      
-        content: "•";
-        font-weight: bold;
-        margin: 0 0.25rem 0 0;
-      }
-    
-  
-
+    margin: 0 0 0.5rem 0;
+    text-align: left;
+    content: "•";
+    font-weight: bold;
+    margin: 0 0.25rem 0 0;
+}
 
 .text-center {
-  text-align: center;
+    text-align: center;
 }
+
 .thick-end {
-  border-bottom: 10px solid black;
+    border-bottom: 10px solid black;
 }
+
 .thin-end {
-  border-bottom: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#bodyleft {
+    background-color: #ff8b8b;
+    border: 1px solid;
+    float: left;
+    display: inline-block;
+    width: 33%;
+    height: 550px;
+    margin: 0 0;
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: no-content;
+}
+
+#bodyright {
+     background-color: orange; 
+    border: 1px solid;
+    display: inline-block;
+    width: 33%;
+    height: 550px;
+    margin: 0 0;
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: no-content;
+}
+
+#food {
+    background-color: #c3d0ff;
+    float: left;
+    width: 33%;
+    height: 550px;
+    margin: 0 0;
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: no-content;
+    border: 1px solid;
+}
+
+#rec {
+}
+
+#prev {
+    position:relative;
+    bottom: 0px;
+    right: 0;
+}
+
+#next {
+        position:relative;
+    bottom: 0px;
+    left: 0;
+}
+
+#add {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#but {
+        width: 100%;
+    height: 33px;
 }

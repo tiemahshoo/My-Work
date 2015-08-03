@@ -906,5 +906,54 @@ namespace Health.Adapters.Adapters
             };
             return model;
         }
+
+        public List<TotalsVM> DeleteTotals(int id)
+        {
+            List<TotalsVM> model;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                model = db.Total.Where(x => x.dayid == id).Select(x => new TotalsVM()
+                {
+                    MealId = x.MealId,
+                    nutrient_id = x.nutrient_id,
+                    food = x.food,
+                    name = x.name,
+                    value = x.value,
+                    unit = x.unit,
+                    percent = x.percent,
+                    totalvitamins = x.totalvitamins,
+                    dayid = x.dayid
+                }).ToList();
+            };
+            //want to add empty vitamins to list
+            //empty = db.Total.Where(x => x.MealId == 1).Select(x => new TotalsVM()
+            //{
+            //    MealId = x.MealId,
+            //    nutrient_id = x.nutrient_id,
+            //    food = x.food,
+            //    name = x.name,
+            //    value = x.value,
+            //    unit = x.unit,
+            //    percent = x.percent,
+            //    totalvitamins = x.totalvitamins
+            //}).ToList();
+
+            return (model);
+        }
+
+        public List<TotalsVM> GetList(int id)
+        {
+            List<TotalsVM> model;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                model = db.Total.Where(x => x.MealId == id).Select(x => new TotalsVM()
+                    {
+                        food = x.food,
+                        MealId = x.MealId,
+                        dayid = x.dayid
+                    }).Distinct().ToList();
+            };
+            return model;
+        }
     }
 }

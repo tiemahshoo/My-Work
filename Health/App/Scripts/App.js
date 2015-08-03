@@ -7,5 +7,10 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         templateUrl: 'App/Scripts/Views/register.html'
     }).when('/login', {
         templateUrl: 'App/Scripts/Views/Login.html'
-    }).when;
+    }).when('/UserPage', {
+        templateUrl: 'App/Scripts/Views/UserPage.html'
+    }).otherwise({ redirectTo: '/' });
+
+ $httpProvider.interceptors.push('AuthFactory');
+    
 }]);
